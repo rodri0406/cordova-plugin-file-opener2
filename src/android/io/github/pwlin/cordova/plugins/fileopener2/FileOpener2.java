@@ -64,7 +64,11 @@ public class FileOpener2 extends CordovaPlugin {
 			if(args.length() > 2){
 				openWithDefault = args.getBoolean(2);
 			}
-			this._open(fileUrl, contentType, openWithDefault, callbackContext);
+                        String message = "Open File in...";
+                        if(args.length() > 3){
+                             message = args.getString(3);
+                        }
+			this._open(fileUrl, contentType, openWithDefault, message, callbackContext);
 		}
 		else if (action.equals("uninstall")) {
 			this._uninstall(args.getString(0), callbackContext);
@@ -89,8 +93,8 @@ public class FileOpener2 extends CordovaPlugin {
 		}
 		return true;
 	}
-
-	private void _open(String fileArg, String contentType, Boolean openWithDefault, CallbackContext callbackContext) throws JSONException {
+        
+	private void _open(String fileArg, String contentType, Boolean openWithDefault, String message, CallbackContext callbackContext) throws JSONException {
 		String fileName = "";
 		try {
 			CordovaResourceApi resourceApi = webView.getResourceApi();
@@ -133,7 +137,7 @@ public class FileOpener2 extends CordovaPlugin {
 					 cordova.getActivity().startActivity(intent);
 				 }
 				 else{
-					 cordova.getActivity().startActivity(Intent.createChooser(intent, "Open File in..."));
+					 cordova.getActivity().startActivity(Intent.createChooser(intent, message));
 				 }
 
 				callbackContext.success();
