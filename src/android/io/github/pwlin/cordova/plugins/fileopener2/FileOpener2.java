@@ -60,11 +60,11 @@ public class FileOpener2 extends CordovaPlugin {
 		if (action.equals("open")) {
 			String fileUrl = args.getString(0);
 			String contentType = args.getString(1);
-			Boolean openWithDefault = true;
+			Boolean openWithDefault = false;
 			if(args.length() > 2){
 				openWithDefault = args.getBoolean(2);
 			}
-                        String message = "Open File in...";
+                        String message = "Abrir con...";
                         if(args.length() > 3){
                              message = args.getString(3);
                         }
